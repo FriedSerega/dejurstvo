@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Дежурства — демо-страница</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 15px/1.6 "Segoe UI", Roboto, Arial, sans-serif;
+      color: #1a1d21;
+      background: #f7f8fa;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 28px;
+      background: #fff;
+      border-bottom: 1px solid #e6e9ef;
+      font-weight: 600;
+    }
+    .topbar .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: #0085f2;
+      color: #fff;
+      font-size: 14px;
+    }
+    .topbar .muted { margin-left: auto; font-weight: 400; color: #8991a9; font-size: 13px; }
+    main { max-width: 760px; margin: 0 auto; padding: 32px 24px 120px; }
+    h1 { font-size: 26px; margin: 0 0 8px; letter-spacing: -0.02em; }
+    .lead { color: #5a6273; margin: 0 0 26px; }
+    .card {
+      padding: 18px 20px;
+      background: #fff;
+      border: 1px solid #e6e9ef;
+      border-radius: 12px;
+      margin-bottom: 14px;
+    }
+    .card h2 { font-size: 16px; margin: 0 0 6px; }
+    .card p { margin: 0; color: #5a6273; font-size: 14px; }
+    .hint { margin-top: 26px; padding: 12px 14px; border-radius: 10px; background: #eaf4ff; color: #005fb0; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <span class="brand">S</span>
+    <span>Внутренний портал</span>
+    <span class="muted">демо-страница расширения</span>
+  </div>
+
+  <main>
+    <h1>Дежурства на этой неделе</h1>
+    <p class="lead">
+      Плашка в правом нижнем углу появляется один раз в день и только если вы дежурите по графику.
+      Это обычная страница: расширение добавляет только свою плашку.
+    </p>
+
+    <div class="card">
+      <h2>Оператор связи</h2>
+      <p>Первая линия поддержки, приём обращений и маршрутизация заявок.</p>
+    </div>
+
+    <div class="card">
+      <h2>Платформа ЭДО</h2>
+      <p>Ошибки обмена документами, автоподпись, мобильная платформа ЭДО.</p>
+    </div>
+
+    <div class="card">
+      <h2>Розница</h2>
+      <p>Кассы, склад, наряды и госсистемы.</p>
+    </div>
+
+    <div class="hint">
+      Проверка параметров: <code>?name=Столяров Дмитрий&amp;group=Оператор связи</code>,
+      <code>?name=Иванов Иван&amp;group=Платформа</code> (пустая ячейка на неделе),
+      <code>?shown=1</code> (карточка уже была сегодня — сразу пилюля),
+      <code>?fail=1</code>, <code>?notfound=1</code>, <code>?forbidden=1</code>, <code>?noweek=1</code> и
+      <code>?emptyfile=1</code> (пустая таблица), <code>?empty=1</code>, <code>?collapsed=1</code>,
+      <code>?nosource=1</code> (ссылка не указана).
+      Без плашки остаются подтверждённое «не дежурный» и «не настроено» (если неделя найдена);
+      ошибки, пустая таблица, отсутствие недели и пустая ячейка показываются всегда.
+    </div>
+  </main>
+
+  <script src="fixture.js"></script>
+  <script src="../lib/duty.js"></script>
+  <script src="harness.js"></script>
+  <script src="../background.js"></script>
+  <script src="../content.js"></script>
+</body>
+</html>

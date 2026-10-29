@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "Дежурный на неделе",
+  "version": "1.0.0",
+  "description": "Показывает в углу страницы, дежурите ли вы на этой неделе, по графику дежурств в Google Sheets.",
+  "permissions": ["storage", "alarms"],
+  "host_permissions": [
+    "https://docs.google.com/*",
+    "https://*.googleusercontent.com/*",
+    "https://accounts.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Дежурства",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://online.sbis.ru/*",
+        "https://online.saby.ru/*",
+        "https://inside.saby.ru/*",
+        "https://inside.sbis.ru/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}

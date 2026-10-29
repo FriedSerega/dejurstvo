@@ -1,0 +1,476 @@
+/* ==========================================
+   POPUP — светлая тема в духе Saby
+   ========================================== */
+
+:root {
+  color-scheme: light;
+
+  --blue: #0085f2;
+  --blue-hover: #0077db;
+  --blue-active: #0069c4;
+  --blue-soft: #eaf4ff;
+
+  --text: #1a1d21;
+  --text-secondary: #5a6273;
+  --placeholder: #8991a9;
+
+  --border: #e6e9ef;
+  --border-strong: #d8dde5;
+  --surface: #ffffff;
+  --surface-muted: #f7f8fa;
+
+  --on: #e8590c;
+  --on-soft: #fff1e6;
+  --on-border: #ffd9bf;
+
+  --off: #5a6273;
+  --off-soft: #f2f4f7;
+
+  --error: #d92d20;
+  --error-soft: #fef3f2;
+  --error-border: #f9d2d2;
+
+  --warn: #9a6700;
+  --warn-soft: #fff7e6;
+  --warn-border: #f5e3b3;
+
+  --radius: 10px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  max-height: 600px;
+  overflow: hidden;
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+::selection { background: rgba(0, 133, 242, 0.18); }
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  border-radius: 9px;
+  background: var(--blue);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+.logo svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.head-text { min-width: 0; }
+
+.head-text h1 {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.head-text p {
+  font-size: 11.5px;
+  color: var(--placeholder);
+}
+
+.live {
+  width: 7px;
+  height: 7px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: var(--border-strong);
+  transition: background 0.2s;
+}
+
+.live[data-tone="on"] { background: var(--on); box-shadow: 0 0 0 3px rgba(232, 89, 12, 0.15); }
+.live[data-tone="off"] { background: #b6bdc9; }
+.live[data-tone="error"] { background: var(--error); }
+.live[data-tone="unknown"] { background: var(--warn); }
+.live[data-tone="setup"] { background: var(--blue); }
+
+/* ==========================================
+   STATUS
+   ========================================== */
+
+main {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 14px 16px 8px;
+}
+
+.status {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-left: 3px solid #c9cfd6;
+  border-radius: var(--radius);
+  background: var(--surface-muted);
+}
+
+.status[data-tone="on"] { border-color: var(--on-border); border-left-color: var(--on); background: var(--on-soft); }
+.status[data-tone="off"] { border-color: var(--border); border-left-color: var(--off); }
+.status[data-tone="setup"] { border-color: #d6eaff; border-left-color: var(--blue); background: var(--blue-soft); }
+.status[data-tone="error"] { border-color: var(--error-border); border-left-color: var(--error); background: var(--error-soft); }
+.status[data-tone="unknown"] { border-color: var(--warn-border); border-left-color: var(--warn); background: var(--warn-soft); }
+
+.status-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 14px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #b6bdc9;
+}
+
+.status[data-tone="on"] .status-dot { background: var(--on); }
+.status[data-tone="off"] .status-dot { background: var(--off); }
+.status[data-tone="setup"] .status-dot { background: var(--blue); }
+.status[data-tone="error"] .status-dot { background: var(--error); }
+.status[data-tone="unknown"] .status-dot { background: var(--warn); }
+
+.status-week {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--placeholder);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status-week:empty { display: none; }
+
+.status-title {
+  margin-top: 5px;
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.status[data-tone="on"] .status-title { color: #b24408; }
+.status[data-tone="error"] .status-title { color: var(--error); }
+
+.status-sub {
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.status-sub:empty { display: none; }
+
+.status-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 9px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(26, 29, 33, 0.07);
+}
+
+.status-list[hidden] { display: none; }
+
+.status-line .label {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--placeholder);
+}
+
+.status-line .value {
+  font-size: 12px;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.status-line .note { font-size: 11px; color: var(--text-secondary); }
+
+.chip {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: #fff;
+  color: #c2410c;
+  font-size: 10px;
+  font-weight: 600;
+  vertical-align: 1px;
+  white-space: nowrap;
+}
+
+/* ==========================================
+   FORM
+   ========================================== */
+
+form { margin-top: 14px; }
+
+.field { display: block; margin-bottom: 10px; }
+
+.field-label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.field input {
+  width: 100%;
+  height: 36px;
+  padding: 0 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.field input:hover { border-color: var(--border-strong); }
+
+.field input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(0, 133, 242, 0.12);
+}
+
+.field input::placeholder { color: var(--placeholder); }
+
+.field input[data-invalid="1"] {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.1);
+}
+
+.hint {
+  margin: -2px 0 11px;
+  font-size: 11px;
+  color: var(--placeholder);
+}
+
+/* При открытой ссылке подсказка под формой не нужна:
+   так попап остаётся без вертикального скролла. */
+.source-open .form-hint { display: none; }
+body:has(#sourceBox[open]) .form-hint { display: none; }
+
+.source {
+  margin: 0 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-muted);
+}
+
+.source summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 11px;
+  list-style: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.source summary::-webkit-details-marker { display: none; }
+
+.source-title::before {
+  content: "▸";
+  display: inline-block;
+  width: 12px;
+  color: var(--placeholder);
+  transition: transform 0.15s;
+}
+
+.source[open] .source-title::before { transform: rotate(90deg); }
+
+.source-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.source-state {
+  max-width: 150px;
+  overflow: hidden;
+  font-size: 10.5px;
+  color: var(--placeholder);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.source-edit {
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+}
+
+.source[open] .source-edit { display: none; }
+
+.source-body {
+  padding: 8px 11px 6px;
+  border-top: 1px solid var(--border);
+}
+
+.source .field { margin-bottom: 4px; }
+
+.source .field input {
+  height: 32px;
+  font-size: 11.5px;
+}
+
+.source .field input[data-invalid="1"] {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.1);
+}
+
+.source-hint {
+  margin: 0 0 4px;
+  font-size: 10.5px;
+}
+
+.source-hint.bad { color: var(--error); }
+
+.submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.submit:hover { background: var(--blue-hover); }
+.submit:active { background: var(--blue-active); }
+.submit:disabled { background: #9cc9ef; cursor: default; }
+
+.submit.saved { background: #0f7b4f; }
+
+.actions {
+  flex: 0 0 auto;
+  padding: 0 16px 10px;
+  background: var(--surface);
+}
+
+:focus-visible {
+  outline: 2px solid rgba(0, 133, 242, 0.45);
+  outline-offset: 2px;
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 auto;
+  gap: 10px;
+  padding: 9px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--surface-muted);
+  font-size: 11px;
+  color: var(--placeholder);
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  min-width: 0;
+}
+
+.link {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.link:hover { text-decoration: underline; }
+
+.link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 11px;
+}
+
+.link-button[hidden] { display: none; }
+
+.updated {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================
+   ОТКРЫТИЕ В ОТДЕЛЬНОЙ ВКЛАДКЕ (первый запуск)
+   ========================================== */
+
+@media (min-width: 560px) {
+  html {
+    min-height: 100%;
+    background: #eef1f5;
+  }
+
+  body {
+    margin: 40px auto;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: 0 18px 48px rgba(16, 24, 40, 0.12);
+    overflow: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

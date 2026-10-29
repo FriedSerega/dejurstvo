@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Дежурства</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="16" rx="3"></rect>
+        <path d="M3 10h18M8 3v4M16 3v4"></path>
+        <path d="M9 15l2 2 4-4"></path>
+      </svg>
+    </div>
+    <div class="head-text">
+      <h1>Дежурства</h1>
+      <p>График дежурств на эту неделю</p>
+    </div>
+    <span class="live" id="live" aria-hidden="true"></span>
+  </header>
+
+  <main>
+    <section class="status" id="status" data-tone="loading" aria-live="polite">
+      <div class="status-top">
+        <span class="status-dot"></span>
+        <span class="status-week" id="statusWeek"></span>
+      </div>
+      <div class="status-title" id="statusTitle">Проверяем график…</div>
+      <div class="status-sub" id="statusSub"></div>
+      <div class="status-list" id="statusList" hidden></div>
+    </section>
+
+    <form id="form" novalidate>
+      <label class="field">
+        <span class="field-label">ФИО</span>
+        <input id="fullName" type="text" placeholder="Иванов Иван Иванович" autocomplete="name" spellcheck="false" required aria-required="true">
+      </label>
+
+      <label class="field">
+        <span class="field-label">Группа</span>
+        <input id="group" type="text" list="groupList" placeholder="Название группы" autocomplete="off" spellcheck="false" required aria-required="true">
+        <datalist id="groupList"></datalist>
+      </label>
+
+      <p class="hint form-hint">Оба поля обязательны. ФИО — как в таблице, группу выберите из списка.</p>
+
+      <details class="source" id="sourceBox">
+        <summary title="Открыть и изменить ссылку на график">
+          <span class="source-title">Ссылка на график</span>
+          <span class="source-meta">
+            <span class="source-state" id="sourceState">используется</span>
+            <span class="source-edit" aria-hidden="true">Изменить</span>
+          </span>
+        </summary>
+        <div class="source-body">
+          <label class="field">
+            <input
+              id="sheetUrl"
+              type="url"
+              aria-label="Ссылка на график в Google Sheets"
+              aria-describedby="sourceHint"
+              placeholder="https://docs.google.com/spreadsheets/d/..."
+              autocomplete="off"
+              spellcheck="false"
+            >
+          </label>
+          <p class="hint source-hint" id="sourceHint" aria-live="polite">
+            Вставьте ссылку из адресной строки Google Sheets.
+          </p>
+        </div>
+      </details>
+    </form>
+  </main>
+
+  <div class="actions">
+    <button class="submit" id="saveBtn" type="submit" form="form">Сохранить и проверить</button>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-left">
+      <a class="link" id="sheetLink" target="_blank" rel="noopener noreferrer" title="Открыть график в Google Sheets">Открыть график ↗</a>
+      <button class="link link-button" id="refreshBtn" type="button" title="Перечитать данные графика">Обновить</button>
+      <button class="link link-button" id="showOverlay" type="button" hidden>Вернуть плашку</button>
+    </div>
+    <span class="updated" id="updated"></span>
+  </footer>
+
+  <script src="lib/duty.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Тесты разбора графика</title>
+  <style>
+    body { margin: 24px; font: 14px/1.5 "Segoe UI", Arial, sans-serif; color: #1a1d21; }
+    h1 { font-size: 18px; margin-bottom: 4px; }
+    .summary { margin: 12px 0 20px; padding: 12px 14px; border-radius: 8px; font-weight: 600; }
+    .summary.ok { background: #e9f7ef; color: #0f7b4f; border: 1px solid #c6ebd8; }
+    .summary.bad { background: #fef3f2; color: #d92d20; border: 1px solid #f9d2d2; }
+    ol { padding-left: 20px; }
+    li { margin-bottom: 4px; }
+    .pass { color: #0f7b4f; }
+    .fail { color: #d92d20; }
+    .detail { color: #5a6273; font-size: 12px; }
+    code { background: #f2f4f7; padding: 0 4px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <h1>Тесты разбора графика дежурств</h1>
+  <div class="detail">Фикстура: реальный CSV на 26.10–06.12. Проверяются недели, ФИО, группы и правила «если пусто».</div>
+  <div class="summary" id="summary">Выполняется…</div>
+  <ol id="list"></ol>
+
+  <script src="fixture.js"></script>
+  <script src="../lib/duty.js"></script>
+  <script src="run.js"></script>
+</body>
+</html>
